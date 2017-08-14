@@ -12,12 +12,12 @@ router.get('/', function(req, res, next){
 
 });
 
-// router.get('/:id', function(req, res, next){
-//     Business.findById({_id: req.params.id}, function(err, b){
-//         if(err){return next(err);}
-//         res.json(b);
-//     });
-// });
+router.get('/q/:id', function(req, res, next){
+    Business.findById({_id: req.params.id}, function(err, b){
+        if(err){return next(err);}
+        res.json(b);
+    });
+});
 
 router.post('/', function(req, res, next){
     var biz = new Business({
@@ -25,10 +25,13 @@ router.post('/', function(req, res, next){
         streetAddress: req.body.address,
         surburb: req.body.surburb,
         city: req.body.city,
+        website: req.body.website,
+        logo: req.body.logo,
         province: req.body.province,
         postalCode: req.body.postalCode,
         tel: req.body.tel,
         email: req.body.email,
+        tags: req.body.tags,
         location: [parseFloat(req.body.latitude), parseFloat(req.body.longitude)]
     });
         biz.save(function(err){
@@ -37,14 +40,42 @@ router.post('/', function(req, res, next){
         });
 });
 
+//Businesses within 5km radius
 router.get('/geowithin', function(req, res, next){
 
-    Business.find({location: {$nearSphere: [parseFloat(req.query.latitude), parseFloat(req.query.longitude)],$maxDistance: 0.001}})
+    Business.find({location: {
+        $nearSphere: {
+            $geometry:{
+                type: 'Point',
+                coordinates: [parseFloat(req.query.latitude), parseFloat(req.query.longitude)]
+            },
+            $maxDistance: parseInt(req.query.distance) || 5000
+        }
+    }})
     .exec(function(err, b){
         if(err){return next(err);}
         res.json(b);
     });
-    //res.json({latitude: parseFloat(req.query.latitude), longitude: parseFloat(req.query.longitude)});
+});
+
+router.get('/searchall', function(req, res, next){
+    Business.find().or(
+        [
+            {tags:  {$in: [req.query.searchStr]}}, 
+            {name:  {$regex : ".*" + req.query.searchStr +".*"}}
+            ])   
+    .exec(function(err, b){
+        if(err){return next(err);}
+        res.json(b);
+    });
+});
+
+router.get('/search', function(req, res, next){
+    Business.find({tags:  {$in: [req.query.searchStr]}}   
+    ).exec(function(err, b){
+        if(err){return next(err);}
+        res.json(b);
+    });
 });
 
 module.exports = router;

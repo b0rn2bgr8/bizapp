@@ -1,0 +1,39 @@
+<%- layout('layout') -%>
+    <section id="welcome">
+        <section id="cover">
+            <section class="container">
+                <section id="global-search">
+                    <h1 class="text-warning">Lookup businesses closest to you</h1>
+                    <div class="input-group">
+                        <input id="q-search" type="search" list="business" class="form-control" placeholder="Search Business...">
+                        <span class="input-group-btn">
+                            <button id="btnSearch" class="btn btn-default" type="button">
+                                <i class="fa fa-search fa-5x"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <datalist id="business"></datalist>
+                </section>
+            </section>
+        </section>
+    </section>
+    <section class="container">
+        <h1 class="text-primary">Search Result</h1>
+        <section class="row" id="searchList">
+        </section>
+    </section>
+
+
+    <script>
+        function initMap(element) {
+            var map = new google.maps.Map(element, {
+                center: {
+                    lat: -34.397,
+                    lng: 150.644
+                },
+                scrollwheel: false,
+                zoom: 8
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANO36ZOvsUmjZ77Mmp3w-8MLZTQGTzxQA&callback=initMap"></script>

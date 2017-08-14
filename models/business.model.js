@@ -5,6 +5,8 @@ var businessSchema = new Schema({
     name: String,
     streetAddress: String,
     surburb: String,
+    logo: String,
+    website: String,
     city: String,
     province: String,
     postalCode: String,
@@ -16,9 +18,7 @@ var businessSchema = new Schema({
 });
 
 businessSchema.index({location: '2dsphere'});
+businessSchema.index({name: 'text'});
 
-businessSchema.methods.findNear = function(cb) {
-  return this.model('Business').find({location: { $nearSphere: this.location, $maxDistance: 0.01} }, cb);
-}
 
 module.exports = mongoose.model('Business', businessSchema);

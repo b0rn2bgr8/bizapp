@@ -32,25 +32,28 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.engine('ejs', engine);
-// app.set('view engine', 'ejs');
+app.engine('ejs', engine);
+app.set('view engine', 'ejs');
 
 //app.use(morgan('dev'));
 // app.use(cookieParser());
-// app.use(session({
-//     resave: true,
-//     saveUninitialized: true,
-//     secret: secret.secretKey,
-//     store: new MongoStore({ url: secret.database, autoReconnect: true })
-// }));
-// app.use(flash());
+app.use(session({
+    resave: true,
+    saveUninitialized: true,
+    secret: secret.secretKey,
+    store: new MongoStore({ url: secret.database, autoReconnect: true })
+}));
+app.use(flash());
 // app.use(passport.initialize());
 // app.use(passport.session());
 app.use(morgan('dev'));
 app.use(cors());
 
+var globalRoute = require('./routes/global.route');
 var bussinessRoute = require('./routes/business.route');
 
+
+app.use(globalRoute);
 app.use('/business', bussinessRoute);
 
 app.listen(secret.port);
