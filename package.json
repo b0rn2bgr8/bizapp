@@ -10,7 +10,7 @@
     "license": "ISC",
     "dependencies": {
         "async": "^2.0.1",
-        "azure-storage": "^1.4.0",
+        "azure-storage": "^2.10.2",
         "bcrypt-nodejs": "0.0.3",
         "body-parser": "^1.15.2",
         "cloudinary": "^1.9.0",
