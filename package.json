@@ -9,7 +9,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "async": "^2.0.1",
+        "async": "^3.2.2",
         "azure-storage": "^1.4.0",
         "bcrypt-nodejs": "0.0.3",
         "body-parser": "^1.15.2",
