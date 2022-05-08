@@ -18,7 +18,7 @@
         "cookie-parser": "^1.4.3",
         "cors": "^2.8.3",
         "ejs": "^2.5.2",
-        "ejs-mate": "^2.3.0",
+        "ejs-mate": "^4.0.0",
         "email-verification": "^0.4.6",
         "express": "^4.14.0",
         "express-flash": "0.0.2",
