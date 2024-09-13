@@ -10,7 +10,7 @@
     "license": "ISC",
     "dependencies": {
         "async": "^2.0.1",
-        "azure-storage": "^1.4.0",
+        "azure-storage": "^2.10.7",
         "bcrypt-nodejs": "0.0.3",
         "body-parser": "^1.15.2",
         "cloudinary": "^1.9.0",
@@ -24,13 +24,13 @@
         "express-flash": "0.0.2",
         "express-session": "^1.14.1",
         "faker": "^3.1.0",
-        "helmet": "^2.2.0",
+        "helmet": "^3.6.1",
         "mongoose": "^4.6.1",
         "morgan": "^1.7.0",
         "passport": "^0.3.2",
         "passport-local": "^1.0.0",
         "passport-local-mongoose": "^4.0.0",
-        "react": "^15.6.1",
+        "react": "^16.5.0",
         "react-dom": "^15.6.1"
     }
 }
